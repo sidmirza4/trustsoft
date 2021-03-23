@@ -14,7 +14,7 @@ export default function Appbar() {
 
 				<Button color="primary">
 					<Link className={classes.link} to="/signin">
-						Sign In
+						Logout
 					</Link>
 				</Button>
 			</Toolbar>

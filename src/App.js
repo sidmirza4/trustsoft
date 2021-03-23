@@ -8,8 +8,8 @@ function App() {
 	return (
 		<div className="App">
 			<Switch>
-				<Route exact path="/signin" component={SignInSide} />
-				<Route exact path="/" component={OfferDetails} />
+				<Route exact path="/offer-details" component={OfferDetails} />
+				<Route exact path="/" component={SignInSide} />
 				<Redirect to="/" />
 			</Switch>
 		</div>

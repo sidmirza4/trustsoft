@@ -9,9 +9,16 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from '../mui-theme/theme';
+import { useHistory } from 'react-router-dom';
 
 export default function SignInSide() {
 	const classes = useStyles();
+	const history = useHistory();
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+		history.push('/offer-details');
+	};
 
 	return (
 		<Grid container component="main" className={classes.root}>
@@ -25,7 +32,7 @@ export default function SignInSide() {
 					<Typography component="h1" variant="h5">
 						Sign in
 					</Typography>
-					<form className={classes.form} noValidate>
+					<form className={classes.form} noValidate onSubmit={submitHandler}>
 						<TextField
 							variant="outlined"
 							margin="normal"
