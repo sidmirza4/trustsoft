@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Grid,
 	Paper,
@@ -12,9 +12,28 @@ import { useStyles } from '../mui-theme/theme';
 import Appbar from './ui/Appbar';
 import SideBar from './ui/Sidebar';
 import TableContent from './ui/Table';
+import { Redirect } from 'react-router';
 
-export default function OfferDetails() {
+export default function OfferDetails({ isAuthenticated, fetchProducts }) {
+	const [products, setProducts] = useState([]);
 	const classes = useStyles();
+	if (!isAuthenticated) {
+		return <Redirect to="/" />;
+	}
+
+	useEffect(() => {
+		(async function loadContent() {
+			const response = await fetchProducts();
+			setProducts(
+				response.data.products.map((p) => ({
+					id: p.id,
+					name: p.name,
+					description: p.description,
+				}))
+			);
+		})();
+	}, [isAuthenticated]);
+
 	return (
 		<Grid container component="main" className={classes.root}>
 			<Appbar />
@@ -39,7 +58,7 @@ export default function OfferDetails() {
 				<Button className={classes.submit} color="primary" variant="contained">
 					ADD OFFER
 				</Button>
-				<TableContent />
+				<TableContent products={products} />
 			</Grid>
 		</Grid>
 	);

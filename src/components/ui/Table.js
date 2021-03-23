@@ -10,7 +10,7 @@ import {
 import { StyledTableCell } from './TableCell';
 import CustomTableRow from './TableRow';
 
-export default function TableContent() {
+export default function TableContent({ products }) {
 	return (
 		<TableContainer component={Paper}>
 			<Table>
@@ -24,21 +24,14 @@ export default function TableContent() {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<CustomTableRow
-						product="Pant"
-						amount="30%"
-						description="Flat 30% off on all pants"
-					/>
-					<CustomTableRow
-						product="Shirt"
-						amount="60%"
-						description="Flat 60% off on all shirts"
-					/>
-					<CustomTableRow
-						product="T-Shirt"
-						amount="1 on 2"
-						description="Buy 2 get 1 free"
-					/>
+					{products.map((p) => (
+						<CustomTableRow
+							key={p.id}
+							product={p.name}
+							amount="30%"
+							description={p.description}
+						/>
+					))}
 				</TableBody>
 			</Table>
 		</TableContainer>

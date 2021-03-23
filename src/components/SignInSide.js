@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,15 +9,17 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from '../mui-theme/theme';
-import { useHistory } from 'react-router-dom';
 
-export default function SignInSide() {
+export default function SignInSide({ onSubmit }) {
+	const inputEmail = useRef();
+	const inputPassword = useRef();
 	const classes = useStyles();
-	const history = useHistory();
 
-	const submitHandler = (e) => {
+	const submitHandler = async (e) => {
 		e.preventDefault();
-		history.push('/offer-details');
+		const email = inputEmail.current.value;
+		const password = inputPassword.current.value;
+		await onSubmit(email, password);
 	};
 
 	return (
@@ -34,6 +36,7 @@ export default function SignInSide() {
 					</Typography>
 					<form className={classes.form} noValidate onSubmit={submitHandler}>
 						<TextField
+							inputRef={inputEmail}
 							variant="outlined"
 							margin="normal"
 							required
@@ -45,6 +48,7 @@ export default function SignInSide() {
 							autoFocus
 						/>
 						<TextField
+							inputRef={inputPassword}
 							variant="outlined"
 							margin="normal"
 							required
