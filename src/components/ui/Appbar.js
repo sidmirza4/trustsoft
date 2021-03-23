@@ -13,7 +13,7 @@ export default function Appbar() {
 				</Typography>
 
 				<Button color="primary">
-					<Link className={classes.link} to="/signin">
+					<Link className={classes.link} to="/">
 						Logout
 					</Link>
 				</Button>
